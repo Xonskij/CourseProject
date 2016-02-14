@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // SKLGJSKDLHJDSKLHJLKSDHL
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
