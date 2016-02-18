@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import android.graphics.Bitmap;
-
+//af
 public class MJPEGGenerator {
     int width = 0;
     int height = 0;

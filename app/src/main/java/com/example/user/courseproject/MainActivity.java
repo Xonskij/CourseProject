@@ -45,7 +45,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
-//afasgsdh
+//af
 public class MainActivity extends Activity implements SurfaceHolder.Callback, View.OnClickListener, Camera.PictureCallback,
         Camera.PreviewCallback {
     private MJPEGGenerator generator;
