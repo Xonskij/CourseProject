@@ -1,9 +1,12 @@
 package com.example.user.courseproject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup.LayoutParams;
@@ -15,12 +18,13 @@ import android.view.View;
 import android.hardware.Camera;
 import android.hardware.Camera.Size;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class MainActivity extends Activity implements SurfaceHolder.Callback, View.OnClickListener, Camera.PictureCallback, Camera.PreviewCallback, Camera.AutoFocusCallback
+public class MainActivity extends Activity implements SurfaceHolder.Callback, View.OnTouchListener, View.OnClickListener, Camera.PictureCallback, Camera.PreviewCallback, Camera.AutoFocusCallback
 {
     private Camera camera;
     private SurfaceHolder surfaceHolder;
@@ -53,6 +57,9 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Vi
         // кнопка имеет имя Button01
         shotBtn = (ImageButton) findViewById(R.id.Button01);
         shotBtn.setOnClickListener(this);
+
+        View view = findViewById(R.id.FrameLayout01);
+        view.setOnTouchListener(this);
     }
 
     @Override
@@ -60,6 +67,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Vi
     {
         super.onResume();
         camera = Camera.open();
+
     }
 
     @Override
@@ -139,6 +147,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Vi
 
             //camera.takePicture(null, null, null, this);
             camera.autoFocus(this);
+            camera.takePicture(null, null, null, this);
         }
     }
 
@@ -169,19 +178,33 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Vi
         paramCamera.startPreview();
     }
 
+
+
     @Override
     public void onAutoFocus(boolean paramBoolean, Camera paramCamera)
     {
-        if (paramBoolean)
+     /*   if (paramBoolean)
         {
             // если удалось сфокусироваться, делаем снимок
             paramCamera.takePicture(null, null, null, this);
-        }
+       }*/
     }
+
+
 
     @Override
     public void onPreviewFrame(byte[] paramArrayOfByte, Camera paramCamera)
     {
         // здесь можно обрабатывать изображение, показываемое в preview
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN: // нажатие
+                camera.autoFocus(this);
+                break;
+        }
+        return true;
     }
 }
