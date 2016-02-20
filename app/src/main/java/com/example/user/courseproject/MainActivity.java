@@ -14,6 +14,7 @@ import android.view.View;
 
 import android.hardware.Camera;
 import android.hardware.Camera.Size;
+import android.widget.ImageButton;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,7 +25,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Vi
     private Camera camera;
     private SurfaceHolder surfaceHolder;
     private SurfaceView preview;
-    private Button shotBtn;
+    private ImageButton shotBtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -32,7 +33,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Vi
         super.onCreate(savedInstanceState);
 
         // если хотим, чтобы приложение постоянно имело портретную ориентацию
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_BEHIND);
 
         // если хотим, чтобы приложение было полноэкранным
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -50,8 +51,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Vi
         surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
         // кнопка имеет имя Button01
-        shotBtn = (Button) findViewById(R.id.Button01);
-        shotBtn.setText("Shot");
+        shotBtn = (ImageButton) findViewById(R.id.Button01);
         shotBtn.setOnClickListener(this);
     }
 
