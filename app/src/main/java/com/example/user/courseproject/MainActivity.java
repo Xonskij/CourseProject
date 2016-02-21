@@ -2,10 +2,17 @@ package com.example.user.courseproject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.media.CamcorderProfile;
+import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -17,194 +24,208 @@ import android.view.View;
 
 import android.hardware.Camera;
 import android.hardware.Camera.Size;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class MainActivity extends Activity implements SurfaceHolder.Callback, View.OnTouchListener, View.OnClickListener, Camera.PictureCallback, Camera.PreviewCallback, Camera.AutoFocusCallback
-{
-    private Camera camera;
-    private SurfaceHolder surfaceHolder;
-    private SurfaceView preview;
-    private ImageButton shotBtn;
+public class MainActivity extends Activity{
 
+    private Camera myCamera;
+    private MyCameraSurfaceView myCameraSurfaceView;
+    private MediaRecorder mediaRecorder;
+
+    Button myButton;
+    SurfaceHolder surfaceHolder;
+    boolean recording;
+
+    /** Called when the activity is first created. */
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // если хотим, чтобы приложение постоянно имело портретную ориентацию
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_BEHIND);
-
-        // если хотим, чтобы приложение было полноэкранным
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        // и без заголовка
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        recording = false;
 
         setContentView(R.layout.activity_main);
 
-        // наше SurfaceView имеет имя SurfaceView01
-        preview = (SurfaceView) findViewById(R.id.SurfaceView01);
-
-        surfaceHolder = preview.getHolder();
-        surfaceHolder.addCallback(this);
-        surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
-        // кнопка имеет имя Button01
-        shotBtn = (ImageButton) findViewById(R.id.Button01);
-        shotBtn.setOnClickListener(this);
-
-        View view = findViewById(R.id.FrameLayout01);
-        view.setOnTouchListener(this);
-    }
-
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        camera = Camera.open();
-
-    }
-
-    @Override
-    protected void onPause()
-    {
-        super.onPause();
-
-        if (camera != null)
-        {
-            camera.setPreviewCallback(null);
-            camera.stopPreview();
-            camera.release();
-            camera = null;
-        }
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height)
-    {
-    }
-
-    @Override
-    public void surfaceCreated(SurfaceHolder holder)
-    {
-        try
-        {
-            camera.setPreviewDisplay(holder);
-            camera.setPreviewCallback(this);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
+        //Get Camera for preview
+        myCamera = getCameraInstance();
+        if(myCamera == null){
+            Toast.makeText(MainActivity.this,
+                    "Fail to get Camera",
+                    Toast.LENGTH_LONG).show();
         }
 
-        Size previewSize = camera.getParameters().getPreviewSize();
-        float aspect = (float) previewSize.width / previewSize.height;
+        myCameraSurfaceView = new MyCameraSurfaceView(this, myCamera);
+        FrameLayout myCameraPreview = (FrameLayout)findViewById(R.id.videoview);
+        myCameraPreview.addView(myCameraSurfaceView);
 
-        int previewSurfaceWidth = preview.getWidth();
-        int previewSurfaceHeight = preview.getHeight();
-
-        LayoutParams lp = preview.getLayoutParams();
-
-        // здесь корректируем размер отображаемого preview, чтобы не было искажений
-
-        if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE)
-        {
-            // портретный вид
-            camera.setDisplayOrientation(90);
-            lp.height = previewSurfaceHeight;
-            lp.width = (int) (previewSurfaceHeight / aspect);
-            ;
-        }
-        else
-        {
-            // ландшафтный
-            camera.setDisplayOrientation(0);
-            lp.width = previewSurfaceWidth;
-            lp.height = (int) (previewSurfaceWidth / aspect);
-        }
-
-        preview.setLayoutParams(lp);
-        camera.startPreview();
+        myButton = (Button)findViewById(R.id.mybutton);
+        myButton.setOnClickListener(myButtonOnClickListener);
     }
 
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder)
-    {
-    }
+    Button.OnClickListener myButtonOnClickListener
+            = new Button.OnClickListener(){
 
-    @Override
-    public void onClick(View v)
-    {
-        if (v == shotBtn)
-        {
-            // либо делаем снимок непосредственно здесь
-            // 	либо включаем обработчик автофокуса
+        @Override
+        public void onClick(View v) {
+            // TODO Auto-generated method stub
+            if(recording){
+                // stop recording and release camera
+                mediaRecorder.stop(); // stop the recording
+                releaseMediaRecorder(); // release the MediaRecorder object
 
-            //camera.takePicture(null, null, null, this);
-            camera.autoFocus(this);
-            camera.takePicture(null, null, null, this);
-        }
-    }
+                //Exit after saved
+                finish();
+            }else{
 
-    @Override
-    public void onPictureTaken(byte[] paramArrayOfByte, Camera paramCamera)
-    {
-        // сохраняем полученные jpg в папке /sdcard/CameraExample/
-        // имя файла - System.currentTimeMillis()
+                //Release Camera before MediaRecorder start
+                releaseCamera();
 
-        try
-        {
-            File saveDir = new File("/sdcard/CameraExample/");
+                if(!prepareMediaRecorder()){
+                    Toast.makeText(MainActivity.this,
+                            "Fail in prepareMediaRecorder()!\n - Ended -",
+                            Toast.LENGTH_LONG).show();
+                    finish();
+                }
 
-            if (!saveDir.exists())
-            {
-                saveDir.mkdirs();
+                mediaRecorder.start();
+                recording = true;
+                myButton.setText("STOP");
             }
+        }};
 
-            FileOutputStream os = new FileOutputStream(String.format("/sdcard/CameraExample/%d.jpg", System.currentTimeMillis()));
-            os.write(paramArrayOfByte);
-            os.close();
+    private Camera getCameraInstance(){
+// TODO Auto-generated method stub
+        Camera c = null;
+        try {
+            c = Camera.open(); // attempt to get a Camera instance
         }
-        catch (Exception e)
-        {
+        catch (Exception e){
+            // Camera is not available (in use or does not exist)
         }
-
-        // после того, как снимок сделан, показ превью отключается. необходимо включить его
-        paramCamera.startPreview();
+        return c; // returns null if camera is unavailable
     }
 
+    private boolean prepareMediaRecorder(){
+        myCamera = getCameraInstance();
+        mediaRecorder = new MediaRecorder();
 
+        myCamera.unlock();
+        mediaRecorder.setCamera(myCamera);
 
-    @Override
-    public void onAutoFocus(boolean paramBoolean, Camera paramCamera)
-    {
-     /*   if (paramBoolean)
-        {
-            // если удалось сфокусироваться, делаем снимок
-            paramCamera.takePicture(null, null, null, this);
-       }*/
-    }
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
+        mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
+        mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
 
+        mediaRecorder.setOutputFile("/sdcard/myvideo.mp4");
+        mediaRecorder.setMaxDuration(60000); // Set max duration 60 sec.
+        mediaRecorder.setMaxFileSize(5000000); // Set max file size 5M
 
-    @Override
-    public void onPreviewFrame(byte[] paramArrayOfByte, Camera paramCamera)
-    {
-        // здесь можно обрабатывать изображение, показываемое в preview
-    }
+        mediaRecorder.setPreviewDisplay(myCameraSurfaceView.getHolder().getSurface());
 
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN: // нажатие
-                camera.autoFocus(this);
-                break;
+        try {
+            mediaRecorder.prepare();
+        } catch (IllegalStateException e) {
+            releaseMediaRecorder();
+            return false;
+        } catch (IOException e) {
+            releaseMediaRecorder();
+            return false;
         }
         return true;
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        releaseMediaRecorder(); // if you are using MediaRecorder, release it first
+        releaseCamera(); // release the camera immediately on pause event
+    }
+
+    private void releaseMediaRecorder(){
+        if (mediaRecorder != null) {
+            mediaRecorder.reset(); // clear recorder configuration
+            mediaRecorder.release(); // release the recorder object
+            mediaRecorder = null;
+            myCamera.lock(); // lock camera for later use
+        }
+    }
+
+    private void releaseCamera(){
+        if (myCamera != null){
+            myCamera.release(); // release the camera for other applications
+            myCamera = null;
+        }
+    }
+
+    public class MyCameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback{
+
+        private SurfaceHolder mHolder;
+        private Camera mCamera;
+
+        public MyCameraSurfaceView(Context context, Camera camera) {
+            super(context);
+            mCamera = camera;
+
+            // Install a SurfaceHolder.Callback so we get notified when the
+            // underlying surface is created and destroyed.
+            mHolder = getHolder();
+            mHolder.addCallback(this);
+            // deprecated setting, but required on Android versions prior to 3.0
+            mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        }
+
+        @Override
+        public void surfaceChanged(SurfaceHolder holder, int format, int weight,
+                                   int height) {
+            // If your preview can change or rotate, take care of those events here.
+            // Make sure to stop the preview before resizing or reformatting it.
+
+            if (mHolder.getSurface() == null){
+                // preview surface does not exist
+                return;
+            }
+
+            // stop preview before making changes
+            try {
+                mCamera.stopPreview();
+            } catch (Exception e){
+                // ignore: tried to stop a non-existent preview
+            }
+
+            // make any resize, rotate or reformatting changes here
+
+            // start preview with new settings
+            try {
+                mCamera.setPreviewDisplay(mHolder);
+                mCamera.startPreview();
+
+            } catch (Exception e){
+            }
+        }
+
+        @Override
+        public void surfaceCreated(SurfaceHolder holder) {
+            // TODO Auto-generated method stub
+            // The Surface has been created, now tell the camera where to draw the preview.
+            try {
+                mCamera.setPreviewDisplay(holder);
+                mCamera.startPreview();
+            } catch (IOException e) {
+            }
+        }
+
+        @Override
+        public void surfaceDestroyed(SurfaceHolder holder) {
+            // TODO Auto-generated method stub
+
+        }
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Time Lapse Render</string>
+   <!-- <string name="app_name">Time Lapse Render</string>
     <string name="title_activity_main">TimeLapse</string>
     <string name="admob_publisher_id">a150adc5d8c00ab</string>
     <string name="couldnt_rate">Could not rate this app</string>
@@ -12,6 +12,18 @@
     <string name="totalsnapshotsText">Total snapshots: 0</string>
     <string name="modeText">Work mode: ready to start</string>
     <string name="longestComment">+ Work mode: /sdcard/TimeLapseFolder/TimeLapseMovie.avi is rendered +</string>
-    <string name="action_settings">action_settings</string>
+    <string name="action_settings">action_settings</string>-->
+    <string name="hello">Hello World, MainScreen!</string>
+    <string name="app_name">VideoRecorderExample</string>
+ <string name="action_settings">action_settings</string>-->
+    <string name="audio_br">AudioEncodingBitRate</string>
+    <string name="video_br">VideoEncodingBitRate</string>
+    <string name="audio_sr">AudioSamplingRate</string>
+    <string name="audio_ch">AudioChannels</string>
+    <string name="video_fr">VideoFrameRate</string>
+    <string name="video_sz_w">VideoSizeWidth</string>
+    <string name="video_sz_h">VideoSizeHeight</string>
+    <string name="max_duration">MaxDuration</string>
+    <string name="max_filesize">setMaxFileSize</string>
 </resources>
     <!--asd-->
