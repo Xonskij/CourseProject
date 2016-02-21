@@ -15,7 +15,7 @@
     <string name="action_settings">action_settings</string>-->
     <string name="hello">Hello World, MainScreen!</string>
     <string name="app_name">VideoRecorderExample</string>
- <string name="action_settings">action_settings</string>-->
+    <string name="action_settings">action_settings</string>-->
     <string name="audio_br">AudioEncodingBitRate</string>
     <string name="video_br">VideoEncodingBitRate</string>
     <string name="audio_sr">AudioSamplingRate</string>
@@ -25,5 +25,7 @@
     <string name="video_sz_h">VideoSizeHeight</string>
     <string name="max_duration">MaxDuration</string>
     <string name="max_filesize">setMaxFileSize</string>
+    <string name="record">Rec</string>
+    <string name="stop">Stop</string>
 </resources>
     <!--asd-->
