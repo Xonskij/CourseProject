@@ -51,6 +51,7 @@ boolean recording;
             recording = false;
 
             setContentView(R.layout.activity_main);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
             //Get Camera for preview
             myCamera = getCameraInstance();
@@ -110,7 +111,7 @@ Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener(){
             return c; // returns null if camera is unavailable
         }
 
-        private boolean prepareMediaRecorder(){
+    private boolean prepareMediaRecorder(){
             myCamera = getCameraInstance();
             mediaRecorder = new MediaRecorder();
 
@@ -122,7 +123,7 @@ Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener(){
            //mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
 
             mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_TIME_LAPSE_HIGH));
-       //     mediaRecorder.setCaptureRate(0.02);
+            mediaRecorder.setCaptureRate(5.0);
             mediaRecorder.setOutputFile("/sdcard/myvideo.mp4");
             mediaRecorder.setMaxDuration(600000); // Set max duration 600 sec.
             mediaRecorder.setMaxFileSize(50000000); // Set max file size 50M
