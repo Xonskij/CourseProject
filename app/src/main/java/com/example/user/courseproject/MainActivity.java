@@ -44,7 +44,7 @@ Button myButton;
 SurfaceHolder surfaceHolder;
 boolean recording;
 
-        /** Called when the activity is first created. */
+        /** ЧЁЗАХЕРНЮПИШЕШЬМУДИЛА*/
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
