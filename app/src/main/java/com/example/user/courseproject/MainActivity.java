@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -123,9 +124,12 @@ Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener(){
            //mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
 
             mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_TIME_LAPSE_HIGH));
+            mediaRecorder.setVideoFrameRate(15);
             mediaRecorder.setCaptureRate(5.0);
-            mediaRecorder.setOutputFile("/sdcard/myvideo.mp4");
-            mediaRecorder.setMaxDuration(600000); // Set max duration 600 sec.
+            mediaRecorder.setOutputFile("/sdcard/tmp/" + System.nanoTime() + "_video.mp4");
+
+
+        mediaRecorder.setMaxDuration(600000); // Set max duration 600 sec.
             mediaRecorder.setMaxFileSize(50000000); // Set max file size 50M
 
             mediaRecorder.setPreviewDisplay(myCameraSurfaceView.getHolder().getSurface());
