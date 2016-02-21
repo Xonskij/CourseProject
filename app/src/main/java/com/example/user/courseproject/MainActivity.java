@@ -68,8 +68,7 @@ boolean recording;
             myButton.setOnClickListener(myButtonOnClickListener);
         }
 
-Button.OnClickListener myButtonOnClickListener
-        = new Button.OnClickListener(){
+Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener(){
 
     @Override
     public void onClick(View v) {
@@ -118,13 +117,12 @@ Button.OnClickListener myButtonOnClickListener
             myCamera.unlock();
             mediaRecorder.setCamera(myCamera);
 
-            mediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
             mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
-            mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
+           //mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
 
-         //   mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_TIME_LAPSE_HIGH));
-           // mediaRecorder.setCaptureRate(0.02);
+            mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_TIME_LAPSE_HIGH));
+       //     mediaRecorder.setCaptureRate(0.02);
             mediaRecorder.setOutputFile("/sdcard/myvideo.mp4");
             mediaRecorder.setMaxDuration(600000); // Set max duration 600 sec.
             mediaRecorder.setMaxFileSize(50000000); // Set max file size 50M
