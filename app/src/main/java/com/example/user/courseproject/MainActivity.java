@@ -126,7 +126,6 @@ Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener(){
             mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_TIME_LAPSE_HIGH));
             mediaRecorder.setVideoFrameRate(15);
             mediaRecorder.setCaptureRate(5.0);
-            mediaRecorder.setOutputFile("/sdcard/myvideo.mp4");
             mediaRecorder.setOutputFile("/sdcard/tmp/" + System.nanoTime() + "_video.mp4");
 
 
