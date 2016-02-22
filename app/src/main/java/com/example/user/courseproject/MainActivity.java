@@ -33,8 +33,9 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
-public class MainActivity extends Activity{
+public class MainActivity extends Activity {
 
 private Camera myCamera;
 private MyCameraSurfaceView myCameraSurfaceView;
@@ -44,27 +45,25 @@ Button myButton;
 SurfaceHolder surfaceHolder;
 boolean recording;
 
-        /** ЧЁЗАХЕРНЮПИШЕШЬМУДИЛА*/
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            recording = false;
+            recording = false; // по умолчанию запись отключена
 
             setContentView(R.layout.activity_main);
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); //что б не спал
 
-            //Get Camera for preview
-            myCamera = getCameraInstance();
+            myCamera = getCameraInstance(); //получаем доступ к камере.Сам метод описан ниже
             if(myCamera == null){
                 Toast.makeText(MainActivity.this,
                         "Fail to get Camera",
                         Toast.LENGTH_LONG).show();
             }
 
-            myCameraSurfaceView = new MyCameraSurfaceView(this, myCamera);
+            myCameraSurfaceView = new MyCameraSurfaceView(this, myCamera);//присваиваем переменной нашу камеру
             FrameLayout myCameraPreview = (FrameLayout)findViewById(R.id.videoview);
-            myCameraPreview.addView(myCameraSurfaceView);
+            myCameraPreview.addView(myCameraSurfaceView);//говорим что FramLayout отображает наш вид с камеры
 
             myButton = (Button)findViewById(R.id.mybutton);
             myButton.setOnClickListener(myButtonOnClickListener);
@@ -104,15 +103,16 @@ Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener(){
 // TODO Auto-generated method stub
             Camera c = null;
             try {
-                c = Camera.open(); // attempt to get a Camera instance
+                c = Camera.open(); //пытаемся получить экземпляр
             }
             catch (Exception e){
-                // Camera is not available (in use or does not exist)
+                // исключения если с камерой что-то не так или её нет
             }
             return c; // returns null if camera is unavailable
         }
 
-    private boolean prepareMediaRecorder(){
+    private boolean prepareMediaRecorder() //здесь задаём все параметры для нашей записи
+    {
             myCamera = getCameraInstance();
             mediaRecorder = new MediaRecorder();
 
@@ -121,15 +121,13 @@ Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener(){
 
             mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
-           //mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
-
             mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_TIME_LAPSE_HIGH));
-            mediaRecorder.setVideoFrameRate(15);
-            mediaRecorder.setCaptureRate(5.0);
+            mediaRecorder.setVideoFrameRate(15); //fps
+            mediaRecorder.setCaptureRate(5.0); //сохранение кадра каждые #.# секунд
             mediaRecorder.setOutputFile("/sdcard/tmp/" + System.nanoTime() + "_video.mp4");
 
 
-        mediaRecorder.setMaxDuration(600000); // Set max duration 600 sec.
+              mediaRecorder.setMaxDuration(600000); // Set max duration 600 sec.
             mediaRecorder.setMaxFileSize(50000000); // Set max file size 50M
 
             mediaRecorder.setPreviewDisplay(myCameraSurfaceView.getHolder().getSurface());
@@ -170,7 +168,8 @@ Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener(){
             }
         }
 
-public class MyCameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback{
+
+    public class MyCameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback{
 
     private SurfaceHolder mHolder;
     private Camera mCamera;
@@ -190,8 +189,6 @@ public class MyCameraSurfaceView extends SurfaceView implements SurfaceHolder.Ca
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int weight,
                                int height) {
-        // If your preview can change or rotate, take care of those events here.
-        // Make sure to stop the preview before resizing or reformatting it.
 
         if (mHolder.getSurface() == null){
             // preview surface does not exist
@@ -233,4 +230,9 @@ public class MyCameraSurfaceView extends SurfaceView implements SurfaceHolder.Ca
 
     }
 }
+
+
 }
+
+
+
