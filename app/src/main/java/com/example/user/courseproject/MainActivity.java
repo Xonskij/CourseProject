@@ -133,9 +133,9 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
         mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_TIME_LAPSE_HIGH));
-        mediaRecorder.setVideoFrameRate(15); //fps
-        mediaRecorder.setCaptureRate(5.0); //сохранение кадра каждые #.# секунд
-        mediaRecorder.setOutputFile("/sdcard/tmp/" + System.nanoTime() + "_video.mp4");
+        mediaRecorder.setVideoFrameRate(24); //fps
+        mediaRecorder.setCaptureRate(0.5); //сохранение кадра каждые #.# секунд
+        mediaRecorder.setOutputFile("/sdcard/TimeLapseCourse/" + System.nanoTime() + "_video.mp4");
 
 
      //   mediaRecorder.setMaxDuration(600000); // Set max duration 600 sec.
