@@ -84,29 +84,22 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         @Override
         public void onClick(View v) {
-            // TODO Auto-generated method stub
-            if(recording){
-                // stop recording and release camera
-                mediaRecorder.stop();  // stop the recording
-                releaseMediaRecorder(); // release the MediaRecorder object
-
-                //Exit after saved
-                finish();
-            }else{
-
-                //Release Camera before MediaRecorder start
+            if(mediaRecorder != null) {
+                mediaRecorder.stop();
+                recording = false;
+                releaseMediaRecorder();
+            }
+            else
+            {
                 releaseCamera();
-
-                if(!prepareMediaRecorder()){
-                    Toast.makeText(MainActivity.this,
-                            "Fail in prepareMediaRecorder()!\n - Ended -",
-                            Toast.LENGTH_LONG).show();
-                    finish();
-                }
-
+            if (prepareMediaRecorder()) {
+                recording=true;
                 mediaRecorder.start();
-                recording = true;
-                myButton.setText("STOP");
+            }
+            else {
+                recording = false;
+                releaseMediaRecorder();
+            }
             }
         }};
 
@@ -135,11 +128,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_TIME_LAPSE_HIGH));
         mediaRecorder.setVideoFrameRate(24); //fps
         mediaRecorder.setCaptureRate(0.5); //сохранение кадра каждые #.# секунд
-        mediaRecorder.setOutputFile("/sdcard/TimeLapseCourse/" + System.nanoTime() + "_video.mp4");
-
-
-     //   mediaRecorder.setMaxDuration(600000); // Set max duration 600 sec.
-    //    mediaRecorder.setMaxFileSize(50000000); // Set max file size 50M
+        mediaRecorder.setOutputFile("/sdcard/tmp/" + System.nanoTime() + "_video.mp4");
 
         mediaRecorder.setPreviewDisplay(myCameraSurfaceView.getHolder().getSurface());
 
