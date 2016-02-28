@@ -128,7 +128,10 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_TIME_LAPSE_HIGH));
         mediaRecorder.setVideoFrameRate(24); //fps
         mediaRecorder.setCaptureRate(0.5); //сохранение кадра каждые #.# секунд
-        mediaRecorder.setOutputFile("/sdcard/tmp/" + System.nanoTime() + "_video.mp4");
+
+        File wallpaperDirectory = new File("/sdcard/TimeLapseCamera/");
+        wallpaperDirectory.mkdirs();
+        mediaRecorder.setOutputFile("/sdcard/TimeLapseCamera/" + System.nanoTime() + "_video.mp4");
 
         mediaRecorder.setPreviewDisplay(myCameraSurfaceView.getHolder().getSurface());
 
