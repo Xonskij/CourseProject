@@ -40,7 +40,6 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     private Camera myCamera;
     private MyCameraSurfaceView myCameraSurfaceView;
     private MediaRecorder mediaRecorder;
-    View rl;
 
     Button myButton;
     SurfaceHolder surfaceHolder;
@@ -64,8 +63,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         myCameraSurfaceView = new MyCameraSurfaceView(this, myCamera);//присваиваем переменной нашу камеру
         FrameLayout myCameraPreview = (FrameLayout)findViewById(R.id.videoview);
-        rl = myCameraPreview;
-        rl.setOnTouchListener(this);
+        myCameraPreview.setOnTouchListener(this);
         myCameraPreview.addView(myCameraSurfaceView);//говорим что FramLayout отображает наш вид с камеры
 
         myButton = (Button)findViewById(R.id.mybutton);
@@ -140,8 +138,8 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         mediaRecorder.setOutputFile("/sdcard/TimeLapseCourse/" + System.nanoTime() + "_video.mp4");
 
 
-        mediaRecorder.setMaxDuration(600000); // Set max duration 600 sec.
-        mediaRecorder.setMaxFileSize(50000000); // Set max file size 50M
+     //   mediaRecorder.setMaxDuration(600000); // Set max duration 600 sec.
+    //    mediaRecorder.setMaxFileSize(50000000); // Set max file size 50M
 
         mediaRecorder.setPreviewDisplay(myCameraSurfaceView.getHolder().getSurface());
 
@@ -160,9 +158,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     boolean startContinuousAutoFocus() {
 
         Camera.Parameters params = myCamera.getParameters();
-
         List<String> focusModes = params.getSupportedFocusModes();
-
         String CAF_VIDEO = Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO,
                 supportedMode = focusModes
                         .contains(CAF_VIDEO) ? CAF_VIDEO : "";
