@@ -20,6 +20,8 @@ import android.view.SurfaceView;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.View;
 
@@ -27,12 +29,14 @@ import android.hardware.Camera;
 import android.hardware.Camera.Size;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.Policy;
 import java.util.List;
 
 public class MainActivity extends Activity implements View.OnTouchListener {
@@ -91,7 +95,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
             }
             else
             {
-                releaseCamera();
+               releaseCamera();
             if (prepareMediaRecorder()) {
                 recording=true;
                 mediaRecorder.start();
@@ -166,11 +170,18 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        initSpinners();
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         releaseMediaRecorder();       // if you are using MediaRecorder, release it first
         releaseCamera();              // release the camera immediately on pause event
     }
+
 
     private void releaseMediaRecorder(){
         if (mediaRecorder != null) {
@@ -250,7 +261,69 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         }
     }
+    void initSpinners() {
+        // Цветовые эффекты
+        // получаем список цветовых эффектов
+        final List<String> colorEffects = myCamera.getParameters()
+                .getSupportedColorEffects();
+        Spinner spEffect = initSpinner(R.id.spEffect, colorEffects, myCamera
+                .getParameters().getColorEffect());
+        // обработчик выбора
+        spEffect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                Camera.Parameters params = myCamera.getParameters();
+                params.setColorEffect(colorEffects.get(arg2));
+                myCamera.setParameters(params);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        // Режимы вспышки
+        // получаем список режимов вспышки
+        final List<String> flashModes = myCamera.getParameters()
+                .getSupportedFlashModes();
+        // настройка спиннера
+        Spinner spFlash = initSpinner(R.id.spFlash, flashModes, myCamera
+                .getParameters().getFlashMode());
+        // обработчик выбора
+        spFlash.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                Camera.Parameters params = myCamera.getParameters();
+                params.setFlashMode(flashModes.get(arg2));
+                myCamera.setParameters(params);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+    }
+
+    Spinner initSpinner(int spinnerId, List<String> data, String currentValue) {
+        // настройка спиннера и адаптера для него
+        Spinner spinner = (Spinner) findViewById(spinnerId);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, data);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        // определеяем какое значение в списке является текущей настройкой
+        for (int i = 0; i < data.size(); i++) {
+            String item = data.get(i);
+            if (item.equals(currentValue)) {
+                spinner.setSelection(i);
+            }
+        }
+
+        return spinner;
+    }
 
 }
 
