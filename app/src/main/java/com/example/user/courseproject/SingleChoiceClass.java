@@ -11,7 +11,7 @@ import android.widget.Toast;
 public class SingleChoiceClass extends DialogFragment {
     String selection;
     public static Integer size = CamcorderProfile.QUALITY_TIME_LAPSE_1080P;
-    final CharSequence[] items = {"4К 2160p","Full HD 1080p","HD 720p","SD 480p","QVGA 240p"};
+    final CharSequence[] items = {"Full HD 1080p","HD 720p","SD 480p","QVGA 240p"};
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -26,11 +26,11 @@ public class SingleChoiceClass extends DialogFragment {
                         break;
                     case 1:
                         selection = (String) items[arg1];
-                        size = CamcorderProfile.QUALITY_TIME_LAPSE_480P;
+                        size = CamcorderProfile.QUALITY_TIME_LAPSE_720P;
                         break;
                     case 2:
                         selection = (String) items[arg1];
-                        size = CamcorderProfile.QUALITY_TIME_LAPSE_720P;
+                        size = CamcorderProfile.QUALITY_TIME_LAPSE_480P;
                         break;
                     case 3:
                         selection = (String) items[arg1];
