@@ -77,13 +77,24 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FPS"
+        android:text="Frame Interval"
         android:id="@+id/button2"
         android:layout_gravity="right|bottom"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="50dp"
         android:onClick="selectFrameInterval"
         android:layout_alignStart="@+id/button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FPS"
+        android:id="@+id/button3"
+        android:layout_gravity="right|bottom"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="250dp"
+        android:onClick="selectFPS"
+        android:layout_alignStart="@+id/button2" />
 
 
 </RelativeLayout>

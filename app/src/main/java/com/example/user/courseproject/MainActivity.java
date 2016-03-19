@@ -62,14 +62,20 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 /////////////////////////////////////////////////
     public void selectResolutoin(View v){
 
-        SingleChoiceClass my_dialog = new SingleChoiceClass();
+        SelectResolution my_dialog = new SelectResolution();
         my_dialog.show(getSupportFragmentManager(), "my_dialog");
     }
 
     public void selectFrameInterval(View v){
 
-        SelectFrameIntervalClass my_dialog1 = new SelectFrameIntervalClass();
+        SelectFrameInterval my_dialog1 = new SelectFrameInterval();
         my_dialog1.show(getSupportFragmentManager(), "my_dialog1");
+    }
+
+    public void selectFPS(View v){
+
+        SelectFpsInVideo my_dialod2 = new SelectFpsInVideo();
+        my_dialod2.show(getSupportFragmentManager(), "mydialog2");
     }
 
     private FragmentManager getSupportFragmentManager() {
@@ -133,9 +139,9 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
-        mediaRecorder.setProfile(CamcorderProfile.get(SingleChoiceClass.size));
-        mediaRecorder.setVideoFrameRate(24); //fps
-        mediaRecorder.setCaptureRate(SelectFrameIntervalClass.rate); //сохранение кадра каждые #.# секунд
+        mediaRecorder.setProfile(CamcorderProfile.get(SelectResolution.size));
+        mediaRecorder.setVideoFrameRate(SelectFpsInVideo.fps); //fps
+        mediaRecorder.setCaptureRate(SelectFrameInterval.rate); //сохранение кадра каждые #.# секунд
 
 
 
