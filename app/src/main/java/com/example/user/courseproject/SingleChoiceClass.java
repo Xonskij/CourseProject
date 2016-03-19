@@ -22,21 +22,17 @@ public class SingleChoiceClass extends DialogFragment {
                 switch (arg1){
                     case 0:
                         selection = (String) items[arg1];
-                        size = CamcorderProfile.QUALITY_TIME_LAPSE_2160P;
+                        size = CamcorderProfile.QUALITY_TIME_LAPSE_1080P;
                         break;
                     case 1:
                         selection = (String) items[arg1];
-                        size = CamcorderProfile.QUALITY_TIME_LAPSE_1080P;
+                        size = CamcorderProfile.QUALITY_TIME_LAPSE_480P;
                         break;
                     case 2:
                         selection = (String) items[arg1];
-                        size = CamcorderProfile.QUALITY_TIME_LAPSE_480P;
-                        break;
-                    case 3:
-                        selection = (String) items[arg1];
                         size = CamcorderProfile.QUALITY_TIME_LAPSE_720P;
                         break;
-                    case 4:
+                    case 3:
                         selection = (String) items[arg1];
                         size = CamcorderProfile.QUALITY_TIME_LAPSE_QVGA;
                         break;
