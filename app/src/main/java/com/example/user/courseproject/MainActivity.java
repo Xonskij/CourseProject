@@ -66,10 +66,16 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         my_dialog.show(getSupportFragmentManager(), "my_dialog");
     }
 
+    public void selectFPS(View v){
+
+        SelectFpsClass my_dialog1 = new SelectFpsClass();
+        my_dialog1.show(getSupportFragmentManager(), "my_dialog1");
+    }
+
     private FragmentManager getSupportFragmentManager() {
         return getFragmentManager();
     }
-/////////////////////////////////////////////////
+/////////////////////////////////////////////////////
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
