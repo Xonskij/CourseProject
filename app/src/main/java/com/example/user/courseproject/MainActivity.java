@@ -1,43 +1,28 @@
 package com.example.user.courseproject;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
+import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Bundle;
-import android.os.Environment;
-import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.ViewGroup.LayoutParams;
-import android.view.Window;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.view.View;
-
-import android.hardware.Camera;
-import android.hardware.Camera.Size;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.Policy;
 import java.util.List;
+
 
 public class MainActivity extends Activity implements View.OnTouchListener {
 
@@ -73,6 +58,18 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         myButton = (Button)findViewById(R.id.mybutton);
         myButton.setOnClickListener(myButtonOnClickListener);
     }
+
+/////////////////////////////////////////////////
+    public void selectResolutoin(View v){
+
+        SingleChoiceClass my_dialog = new SingleChoiceClass();
+        my_dialog.show(getSupportFragmentManager(), "my_dialog");
+    }
+
+    private FragmentManager getSupportFragmentManager() {
+        return getFragmentManager();
+    }
+/////////////////////////////////////////////////
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -131,7 +128,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_TIME_LAPSE_HIGH));
         mediaRecorder.setVideoFrameRate(24); //fps
-        mediaRecorder.setCaptureRate(0.5); //сохранение кадра каждые #.# секунд
+        mediaRecorder.setCaptureRate(10); //сохранение кадра каждые #.# секунд
 
         File wallpaperDirectory = new File("/sdcard/TimeLapseCamera/");
         wallpaperDirectory.mkdirs();
