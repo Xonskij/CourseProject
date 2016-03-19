@@ -28,7 +28,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
     private Camera myCamera;
     private MyCameraSurfaceView myCameraSurfaceView;
-    private MediaRecorder mediaRecorder;
+    public static MediaRecorder mediaRecorder;
 
     Button myButton;
     SurfaceHolder surfaceHolder;
@@ -118,6 +118,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
     private boolean prepareMediaRecorder() //здесь задаём все параметры для нашей записи
     {
+
         myCamera = getCameraInstance();
         mediaRecorder = new MediaRecorder();
 
@@ -126,7 +127,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
-        mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_TIME_LAPSE_HIGH));
+        mediaRecorder.setProfile(CamcorderProfile.get(SingleChoiceClass.size));
         mediaRecorder.setVideoFrameRate(24); //fps
         mediaRecorder.setCaptureRate(10); //сохранение кадра каждые #.# секунд
 

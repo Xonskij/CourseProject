@@ -4,14 +4,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.media.CamcorderProfile;
 import android.os.Bundle;
 import android.widget.Toast;
 
-/**
- * Created by Павел on 19.03.2016.
- */
 public class SingleChoiceClass extends DialogFragment {
     String selection;
+    public static Integer size;
     final CharSequence[] items = {"Full HD 1080p","HD 720p","SD 480p"};
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -23,12 +22,15 @@ public class SingleChoiceClass extends DialogFragment {
                 switch (arg1){
                     case 0:
                         selection = (String) items[arg1];
+                        size = CamcorderProfile.QUALITY_TIME_LAPSE_HIGH;
                         break;
                     case 1:
                         selection = (String) items[arg1];
+                        size = CamcorderProfile.QUALITY_TIME_LAPSE_480P;
                         break;
                     case 2:
                         selection = (String) items[arg1];
+                        size = CamcorderProfile.QUALITY_TIME_LAPSE_CIF;
                         break;
                 }
             }
