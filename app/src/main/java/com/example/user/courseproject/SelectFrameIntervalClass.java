@@ -4,14 +4,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
-import android.media.CamcorderProfile;
 import android.os.Bundle;
 import android.widget.Toast;
 
-public class SelectFpsClass extends DialogFragment {
+public class SelectFrameIntervalClass extends DialogFragment {
     String selection;
-    public static Integer rate = 10;
-    final CharSequence[] items = {"1 second","5 second","10 second","15second","30 second"};
+    public static double rate = 0.5;
+    final CharSequence[] items = {"1 second","2 seconds","3 seconds","5 second","10 second","15second","30 second"};
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -26,19 +25,27 @@ public class SelectFpsClass extends DialogFragment {
                         break;
                     case 1:
                         selection = (String) items[arg1];
-                        rate = 5;
+                        rate = 0.5;
                         break;
                     case 2:
                         selection = (String) items[arg1];
-                        rate = 10;
+                        rate = 0.333;
                         break;
                     case 3:
                         selection = (String) items[arg1];
-                        rate = 15;
+                        rate = 0.2;
                         break;
                     case 4:
                         selection = (String) items[arg1];
-                        rate = 30;
+                        rate = 0.01;
+                        break;
+                    case 5:
+                        selection = (String) items[arg1];
+                        rate = 0.0666;
+                        break;
+                    case 6:
+                        selection = (String) items[arg1];
+                        rate = 0.0333;
                         break;
                 }
             }
