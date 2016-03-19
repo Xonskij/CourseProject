@@ -8,12 +8,9 @@ import android.media.CamcorderProfile;
 import android.os.Bundle;
 import android.widget.Toast;
 
-/**
- * Created by Павел on 19.03.2016.
- */
 public class SelectFpsClass extends DialogFragment {
     String selection;
-    public static Integer size = CamcorderProfile.QUALITY_TIME_LAPSE_1080P;
+    public static Integer rate = 10;
     final CharSequence[] items = {"1 second","5 second","10 second","15second","30 second"};
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -25,30 +22,30 @@ public class SelectFpsClass extends DialogFragment {
                 switch (arg1) {
                     case 0:
                         selection = (String) items[arg1];
-                        //size = CamcorderProfile.QUALITY_TIME_LAPSE_1080P;
+                        rate = 1;
                         break;
                     case 1:
                         selection = (String) items[arg1];
-                        //  size = CamcorderProfile.QUALITY_TIME_LAPSE_720P;
+                        rate = 5;
                         break;
                     case 2:
                         selection = (String) items[arg1];
-                        //  size = CamcorderProfile.QUALITY_TIME_LAPSE_480P;
+                        rate = 10;
                         break;
                     case 3:
                         selection = (String) items[arg1];
-                        //  size = CamcorderProfile.QUALITY_TIME_LAPSE_QVGA;
+                        rate = 15;
                         break;
                     case 4:
                         selection = (String) items[arg1];
-                        //  size = CamcorderProfile.QUALITY_TIME_LAPSE_QVGA;
+                        rate = 30;
                         break;
                 }
             }
         }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getActivity(), "You choose frame interval: " + selection, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "You choose FPS = " + selection, Toast.LENGTH_SHORT).show();
             }
         });
 

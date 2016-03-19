@@ -135,7 +135,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         mediaRecorder.setProfile(CamcorderProfile.get(SingleChoiceClass.size));
         mediaRecorder.setVideoFrameRate(24); //fps
-        mediaRecorder.setCaptureRate(10); //сохранение кадра каждые #.# секунд
+        mediaRecorder.setCaptureRate(SelectFpsClass.rate); //сохранение кадра каждые #.# секунд
 
         File wallpaperDirectory = new File("/sdcard/TimeLapseCamera/");
         wallpaperDirectory.mkdirs();
