@@ -16,5 +16,7 @@
     <string name="color_effect">Color Effect</string>
     <string name="flash_mode">Flash Mode</string>
     <string name="white_balance">White Balance</string>
+    <string name="focus_sel">Focus Mode</string>
+    <string name="scene_mode">Scene Mode</string>
 </resources>
     <!--asd-->

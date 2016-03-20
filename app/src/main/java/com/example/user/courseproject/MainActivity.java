@@ -3,10 +3,13 @@ package com.example.user.courseproject;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -316,6 +319,26 @@ public class MainActivity extends Activity implements View.OnTouchListener {
                                        int arg2, long arg3) {
                 Camera.Parameters params = myCamera.getParameters();
                 params.setWhiteBalance(colorEffectsWB.get(arg2));
+                myCamera.setParameters(params);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        //Режим фокуса
+        final List<String> focusSelect = myCamera.getParameters()
+                .getSupportedFocusModes();
+        Spinner focusSel = initSpinner(R.id.focusSel, focusSelect, myCamera
+                .getParameters().getFocusMode());
+        // обработчик выбора
+        focusSel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                Camera.Parameters params = myCamera.getParameters();
+                params.setFocusMode(focusSelect.get(arg2));
                 myCamera.setParameters(params);
             }
 
