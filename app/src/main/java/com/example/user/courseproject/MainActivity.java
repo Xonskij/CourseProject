@@ -148,7 +148,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         mediaRecorder.setProfile(CamcorderProfile.get(SelectResolution.size));
         mediaRecorder.setVideoFrameRate(SelectFpsInVideo.fps); //fps
         mediaRecorder.setCaptureRate(SelectFrameInterval.rate);//сохранение кадра каждые #.# секунд
-        mediaRecorder.setMaxDuration(SelectDuration.dur);
+        mediaRecorder.setMaxDuration(SelectDuration.dur);//продолжительность видео
 
 
         File wallpaperDirectory = new File("/sdcard/TimeLapseCamera/");
@@ -279,6 +279,9 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         }
     }
+
+
+
     void initSpinners() {
         // Цветовые эффекты
         // получаем список цветовых эффектов
@@ -293,6 +296,26 @@ public class MainActivity extends Activity implements View.OnTouchListener {
                                        int arg2, long arg3) {
                 Camera.Parameters params = myCamera.getParameters();
                 params.setColorEffect(colorEffects.get(arg2));
+                myCamera.setParameters(params);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        //Баланс Белого
+        final List<String> colorEffectsWB = myCamera.getParameters()
+                .getSupportedWhiteBalance();
+        Spinner spEffectWB = initSpinner(R.id.spEffectWB, colorEffectsWB, myCamera
+                .getParameters().getWhiteBalance());
+        // обработчик выбора
+        spEffectWB.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                Camera.Parameters params = myCamera.getParameters();
+                params.setWhiteBalance(colorEffectsWB.get(arg2));
                 myCamera.setParameters(params);
             }
 

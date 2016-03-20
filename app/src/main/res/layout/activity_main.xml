@@ -62,6 +62,21 @@
                 android:layout_height="wrap_content">
             </Spinner>
         </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/white_balance">
+            </TextView>
+            <Spinner
+                android:id="@+id/spEffectWB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </Spinner>
+        </TableRow>
     </TableLayout>
 
     <Button
