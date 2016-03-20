@@ -75,7 +75,13 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     public void selectFPS(View v){
 
         SelectFpsInVideo my_dialod2 = new SelectFpsInVideo();
-        my_dialod2.show(getSupportFragmentManager(), "mydialog2");
+        my_dialod2.show(getSupportFragmentManager(), "my_dialog2");
+    }
+
+    public void selectDuration(View v){
+
+        SelectDuration my_dialog3 = new SelectDuration();
+        my_dialog3.show(getSupportFragmentManager(), "my_dialog3");
     }
 
     private FragmentManager getSupportFragmentManager() {
@@ -141,8 +147,8 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         mediaRecorder.setProfile(CamcorderProfile.get(SelectResolution.size));
         mediaRecorder.setVideoFrameRate(SelectFpsInVideo.fps); //fps
-        mediaRecorder.setCaptureRate(SelectFrameInterval.rate); //сохранение кадра каждые #.# секунд
-
+        mediaRecorder.setCaptureRate(SelectFrameInterval.rate);//сохранение кадра каждые #.# секунд
+        mediaRecorder.setMaxDuration(SelectDuration.dur);
 
 
         File wallpaperDirectory = new File("/sdcard/TimeLapseCamera/");

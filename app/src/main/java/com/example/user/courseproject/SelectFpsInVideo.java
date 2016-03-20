@@ -42,10 +42,6 @@ public class SelectFpsInVideo extends DialogFragment{
                         selection = (String) items[arg1];
                         fps = 5;
                         break;
-                    case 5:
-                        selection = (String) items[arg1];
-                        fps = 5;
-                        break;
                 }
             }
         }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
