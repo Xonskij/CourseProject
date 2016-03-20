@@ -1,6 +1,6 @@
 <resources>
     <string name="hello">Hello World, MainScreen!</string>
-    <string name="app_name">VideoRecorderExample</string>
+    <string name="app_name">TimeLapse Camera</string>
     <string name="action_settings">action_settings</string>-->
     <string name="audio_br">AudioEncodingBitRate</string>
     <string name="video_br">VideoEncodingBitRate</string>
@@ -15,5 +15,6 @@
     <string name="stop">Stop</string>
     <string name="color_effect">Color Effect</string>
     <string name="flash_mode">Flash Mode</string>
+    <string name="white_balance">White Balance</string>
 </resources>
     <!--asd-->
