@@ -347,6 +347,27 @@ public class MainActivity extends Activity implements View.OnTouchListener {
             }
         });
 
+        //Выбор сцены
+        final List<String> sceneMode = myCamera.getParameters()
+                .getSupportedSceneModes();
+        Spinner sceneMode1 = initSpinner(R.id.scene_mode, sceneMode, myCamera
+                .getParameters().getSceneMode());
+        // обработчик выбора
+        sceneMode1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                Camera.Parameters params = myCamera.getParameters();
+                params.setSceneMode(sceneMode.get(arg2));
+                myCamera.setParameters(params);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+
         // Режимы вспышки
         // получаем список режимов вспышки
         final List<String> flashModes = myCamera.getParameters()
