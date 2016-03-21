@@ -3,13 +3,10 @@ package com.example.user.courseproject;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -19,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -34,6 +32,8 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     public static MediaRecorder mediaRecorder;
 
     Button myButton;
+    Button button5;
+    ImageView image;
     SurfaceHolder surfaceHolder;
     boolean recording;
 
@@ -60,6 +60,8 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         myButton = (Button)findViewById(R.id.mybutton);
         myButton.setOnClickListener(myButtonOnClickListener);
+
+        addListenerOnButton();
     }
 
 /////////////////////////////////////////////////
@@ -101,7 +103,23 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         }
         return true;
     }
+//////
+        public void addListenerOnButton() {
 
+        image = (ImageView) findViewById(R.id.grid1);
+
+        button5 = (Button) findViewById(R.id.button5);
+        button5.setOnClickListener(new View.OnClickListener() {
+
+        @Override
+        public void onClick(View arg0) {
+            image.setImageResource(R.drawable.grid);
+        }
+
+    });
+
+}
+////////
     Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener(){
 
         @Override

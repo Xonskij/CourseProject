@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/videoview"
@@ -28,7 +27,8 @@
         android:layout_alignWithParentIfMissing="false"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:alpha="0.6" />
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -44,7 +44,8 @@
             <Spinner
                 android:id="@+id/spEffect"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:alpha="0.6">
             </Spinner>
         </TableRow>
         <TableRow
@@ -59,9 +60,17 @@
             <Spinner
                 android:id="@+id/spFlash"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:alpha="0.6">
             </Spinner>
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,7 +83,8 @@
             <Spinner
                 android:id="@+id/spEffectWB"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:alpha="0.6">
             </Spinner>
         </TableRow>
         <TableRow
@@ -89,7 +99,8 @@
             <Spinner
                 android:id="@+id/focusSel"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:alpha="0.6">
             </Spinner>
         </TableRow>
         <TableRow
@@ -104,7 +115,8 @@
             <Spinner
                 android:id="@+id/scene_mode"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:alpha="0.6">
             </Spinner>
         </TableRow>
     </TableLayout>
@@ -117,7 +129,8 @@
         android:layout_gravity="left|center_vertical"
         android:onClick="selectResolutoin"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="false" />
+        android:layout_alignParentStart="false"
+        android:alpha="0.6" />
 
     <Button
         android:layout_width="wrap_content"
@@ -128,7 +141,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="50dp"
         android:onClick="selectFrameInterval"
-        android:layout_alignStart="@+id/button" />
+        android:layout_alignStart="@+id/button"
+        android:alpha="0.6" />
 
     <Button
         android:layout_width="wrap_content"
@@ -139,7 +153,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="250dp"
         android:onClick="selectFPS"
-        android:layout_alignStart="@+id/button2" />
+        android:layout_alignStart="@+id/button2"
+        android:alpha="0.6" />
 
     <Button
         android:layout_width="wrap_content"
@@ -150,7 +165,24 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="300dp"
         android:onClick="selectDuration"
-        android:layout_alignStart="@+id/button3" />
+        android:layout_alignStart="@+id/button3"
+        android:alpha="0.6" />
 
+    <ImageView
+        android:id="@+id/grid1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:alpha="0.5" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Grid"
+        android:id="@+id/button5"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="100dp"
+        android:layout_alignStart="@+id/button2"
+        android:alpha="0.6" />
 
 </RelativeLayout>
