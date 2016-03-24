@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     ImageView image;
     SurfaceHolder surfaceHolder;
     boolean recording;
-    int[] images = {R.drawable.grid, R.drawable.pic1};
+    int[] images = {R.drawable.grid, R.drawable.grid_null};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
