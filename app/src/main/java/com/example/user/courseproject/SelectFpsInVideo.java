@@ -7,9 +7,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Toast;
 
-/**
- * Created by Павел on 19.03.2016.
- */
 public class SelectFpsInVideo extends DialogFragment{
     String selection;
     public static Integer fps = 24;

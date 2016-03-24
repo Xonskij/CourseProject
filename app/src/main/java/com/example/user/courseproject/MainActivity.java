@@ -30,12 +30,14 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     private Camera myCamera;
     private MyCameraSurfaceView myCameraSurfaceView;
     public static MediaRecorder mediaRecorder;
+    public int current;
 
     Button myButton;
     Button button5;
     ImageView image;
     SurfaceHolder surfaceHolder;
     boolean recording;
+    int[] images = {R.drawable.grid, R.drawable.pic1};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,9 +115,11 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         @Override
         public void onClick(View arg0) {
-            image.setImageResource(R.drawable.grid);
+            //image.setImageResource(R.drawable.grid);
+            current++;
+            current = current % images.length;
+            image.setImageResource(images[current]);
         }
-
     });
 
 }
