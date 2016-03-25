@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     ImageView image;
     SurfaceHolder surfaceHolder;
     boolean recording;
-    int[] images = {R.drawable.grid, R.drawable.grid_null};
+    int[] images = {R.drawable.grid_null, R.drawable.grid};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,18 +49,18 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); //что б не спал
 
         myCamera = getCameraInstance(); //получаем доступ к камере.Сам метод описан ниже
-        if(myCamera == null){
+        if (myCamera == null) {
             Toast.makeText(MainActivity.this,
                     "Fail to get Camera",
                     Toast.LENGTH_LONG).show();
         }
 
         myCameraSurfaceView = new MyCameraSurfaceView(this, myCamera);//присваиваем переменной нашу камеру
-        FrameLayout myCameraPreview = (FrameLayout)findViewById(R.id.videoview);
+        FrameLayout myCameraPreview = (FrameLayout) findViewById(R.id.videoview);
         myCameraPreview.setOnTouchListener(this);
         myCameraPreview.addView(myCameraSurfaceView);//говорим что FramLayout отображает наш вид с камеры
 
-        myButton = (Button)findViewById(R.id.mybutton);
+        myButton = (Button) findViewById(R.id.mybutton);
         myButton.setOnClickListener(myButtonOnClickListener);
 
         addListenerOnButton();
@@ -73,19 +73,19 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         my_dialog.show(getSupportFragmentManager(), "my_dialog");
     }
 
-    public void selectFrameInterval(View v){
+    public void selectFrameInterval(View v) {
 
         SelectFrameInterval my_dialog1 = new SelectFrameInterval();
         my_dialog1.show(getSupportFragmentManager(), "my_dialog1");
     }
 
-    public void selectFPS(View v){
+    public void selectFPS(View v) {
 
         SelectFpsInVideo my_dialod2 = new SelectFpsInVideo();
         my_dialod2.show(getSupportFragmentManager(), "my_dialog2");
     }
 
-    public void selectDuration(View v){
+    public void selectDuration(View v) {
 
         SelectDuration my_dialog3 = new SelectDuration();
         my_dialog3.show(getSupportFragmentManager(), "my_dialog3");
@@ -105,55 +105,54 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         }
         return true;
     }
-//////
-        public void addListenerOnButton() {
+
+    //////
+    public void addListenerOnButton() {
 
         image = (ImageView) findViewById(R.id.grid1);
 
         button5 = (Button) findViewById(R.id.button5);
         button5.setOnClickListener(new View.OnClickListener() {
 
-        @Override
-        public void onClick(View arg0) {
-            //image.setImageResource(R.drawable.grid);
-            current++;
-            current = current % images.length;
-            image.setImageResource(images[current]);
-        }
-    });
+            @Override
+            public void onClick(View arg0) {
+                //image.setImageResource(R.drawable.grid);
+                current++;
+                current = current % images.length;
+                image.setImageResource(images[current]);
+            }
+        });
 
-}
-////////
-    Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener(){
+    }
+
+    ////////
+    Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener() {
 
         @Override
         public void onClick(View v) {
-            if(mediaRecorder != null) {
+            if (mediaRecorder != null) {
                 mediaRecorder.stop();
                 recording = false;
                 releaseMediaRecorder();
+            } else {
+                releaseCamera();
+                if (prepareMediaRecorder()) {
+                    recording = true;
+                    mediaRecorder.start();
+                } else {
+                    recording = false;
+                    releaseMediaRecorder();
+                }
             }
-            else
-            {
-               releaseCamera();
-            if (prepareMediaRecorder()) {
-                recording=true;
-                mediaRecorder.start();
-            }
-            else {
-                recording = false;
-                releaseMediaRecorder();
-            }
-            }
-        }};
+        }
+    };
 
-    private Camera getCameraInstance(){
+    private Camera getCameraInstance() {
 // TODO Auto-generated method stub
         Camera c = null;
         try {
             c = Camera.open(); //пытаемся получить экземпляр
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             // исключения если с камерой что-то не так или её нет
         }
         return c; // returns null if camera is unavailable
@@ -226,7 +225,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     }
 
 
-    private void releaseMediaRecorder(){
+    private void releaseMediaRecorder() {
         if (mediaRecorder != null) {
             mediaRecorder.reset();   // clear recorder configuration
             mediaRecorder.release(); // release the recorder object
@@ -235,15 +234,15 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         }
     }
 
-    private void releaseCamera(){
-        if (myCamera != null){
+    private void releaseCamera() {
+        if (myCamera != null) {
             myCamera.release();        // release the camera for other applications
             myCamera = null;
         }
     }
 
 
-    public class MyCameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback{
+    public class MyCameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
 
         private SurfaceHolder mHolder;
         private Camera mCamera;
@@ -264,7 +263,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         public void surfaceChanged(SurfaceHolder holder, int format, int weight,
                                    int height) {
 
-            if (mHolder.getSurface() == null){
+            if (mHolder.getSurface() == null) {
                 // preview surface does not exist
                 return;
             }
@@ -272,7 +271,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
             // stop preview before making changes
             try {
                 mCamera.stopPreview();
-            } catch (Exception e){
+            } catch (Exception e) {
                 // ignore: tried to stop a non-existent preview
             }
 
@@ -283,7 +282,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
                 mCamera.setPreviewDisplay(mHolder);
                 mCamera.startPreview();
 
-            } catch (Exception e){
+            } catch (Exception e) {
             }
         }
 
@@ -304,7 +303,6 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         }
     }
-
 
 
     void initSpinners() {
@@ -431,7 +429,6 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         return spinner;
     }
-
 }
 
 
