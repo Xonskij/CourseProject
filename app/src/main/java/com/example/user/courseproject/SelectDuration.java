@@ -23,57 +23,76 @@ public class SelectDuration extends DialogFragment {
                     case 0:
                         selection = (String) items[arg1];
                         dur = 3000;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 1:
                         selection = (String) items[arg1];
                         dur = 5000;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 2:
                         selection = (String) items[arg1];
                         dur = 10000;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 3:
                         selection = (String) items[arg1];
                         dur = 15000;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 4:
                         selection = (String) items[arg1];
                         dur = 20000;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 5:
                         selection = (String) items[arg1];
                         dur = 30000;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 6:
                         selection = (String) items[arg1];
                         dur = 60000;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 7:
                         selection = (String) items[arg1];
                         dur = 180000;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 8:
                         selection = (String) items[arg1];
                         dur = 300000;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 9:
                         selection = (String) items[arg1];
                         dur = 600000;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 10:
                         selection = (String) items[arg1];
                         dur = 1800000;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 11:
                         selection = (String) items[arg1];
                         dur = 3600000;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                 }
-            }
-        }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getActivity(), "You choose duration = " + selection, Toast.LENGTH_SHORT).show();
             }
         });
 

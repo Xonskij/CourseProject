@@ -22,37 +22,46 @@ public class SelectFrameInterval extends DialogFragment {
                     case 0:
                         selection = (String) items[arg1];
                         rate = 1;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 1:
                         selection = (String) items[arg1];
                         rate = 0.5;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 2:
                         selection = (String) items[arg1];
                         rate = 0.333;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 3:
                         selection = (String) items[arg1];
                         rate = 0.2;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 4:
                         selection = (String) items[arg1];
                         rate = 0.01;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 5:
                         selection = (String) items[arg1];
                         rate = 0.0666;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 6:
                         selection = (String) items[arg1];
                         rate = 0.0333;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                 }
-            }
-        }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getActivity(), "You choose Frame Interval = " + selection, Toast.LENGTH_SHORT).show();
             }
         });
 

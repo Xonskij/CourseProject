@@ -23,25 +23,28 @@ public class SelectResolution extends DialogFragment {
                     case 0:
                         selection = (String) items[arg1];
                         size = CamcorderProfile.QUALITY_TIME_LAPSE_1080P;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 1:
                         selection = (String) items[arg1];
                         size = CamcorderProfile.QUALITY_TIME_LAPSE_720P;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 2:
                         selection = (String) items[arg1];
                         size = CamcorderProfile.QUALITY_TIME_LAPSE_480P;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                     case 3:
                         selection = (String) items[arg1];
                         size = CamcorderProfile.QUALITY_TIME_LAPSE_QVGA;
+                        getActivity();
+                        arg0.dismiss();
                         break;
                 }
-            }
-        }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getActivity(), "You choose resolution: " + selection, Toast.LENGTH_SHORT).show();
             }
         });
 
