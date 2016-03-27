@@ -30,159 +30,166 @@
         android:textStyle="bold"
         android:alpha="0.6" />
     <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/color_effect">
-            </TextView>
-            <Spinner
-                android:id="@+id/spEffect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.6">
-            </Spinner>
-        </TableRow>
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/flash_mode">
-            </TextView>
-            <Spinner
-                android:id="@+id/spFlash"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.6">
-            </Spinner>
-        </TableRow>
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content">
+         <TableRow
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:gravity="center_vertical">
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/color_effect">
+             </TextView>
+             <Spinner
+                 android:id="@+id/spEffect"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:alpha="0.6">
+             </Spinner>
+         </TableRow>
+         <TableRow
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:gravity="center_vertical">
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/flash_mode">
+             </TextView>
+             <Spinner
+                 android:id="@+id/spFlash"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:alpha="0.6">
+             </Spinner>
+         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+         <TableRow
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
-        </TableRow>
+         </TableRow>
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/white_balance">
-            </TextView>
-            <Spinner
-                android:id="@+id/spEffectWB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.6">
-            </Spinner>
-        </TableRow>
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/focus_sel">
-            </TextView>
-            <Spinner
-                android:id="@+id/focusSel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.6">
-            </Spinner>
-        </TableRow>
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/scene_mode">
-            </TextView>
-            <Spinner
-                android:id="@+id/scene_mode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.6">
-            </Spinner>
-        </TableRow>
-    </TableLayout>
+         <TableRow
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:gravity="center_vertical">
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/white_balance">
+             </TextView>
+             <Spinner
+                 android:id="@+id/spEffectWB"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:alpha="0.6">
+             </Spinner>
+         </TableRow>
+         <TableRow
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:gravity="center_vertical">
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/focus_sel">
+             </TextView>
+             <Spinner
+                 android:id="@+id/focusSel"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:alpha="0.6">
+             </Spinner>
+         </TableRow>
+         <TableRow
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:gravity="center_vertical">
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/scene_mode">
+             </TextView>
+             <Spinner
+                 android:id="@+id/scene_mode"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:alpha="0.6">
+             </Spinner>
+         </TableRow>
+     </TableLayout>
 
-    <Button
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Resolution"
+         android:id="@+id/button"
+         android:layout_gravity="left|center_vertical"
+         android:onClick="selectResolutoin"
+         android:layout_alignParentEnd="true"
+         android:layout_alignParentStart="false"
+         android:alpha="0.6" />
+
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Frame Interval"
+         android:id="@+id/button2"
+         android:layout_gravity="right|bottom"
+         android:layout_alignParentEnd="true"
+         android:layout_marginTop="45dp"
+         android:onClick="selectFrameInterval"
+         android:layout_alignStart="@+id/button"
+         android:alpha="0.6" />
+
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="FPS"
+         android:id="@+id/button3"
+         android:layout_gravity="right|bottom"
+         android:layout_alignParentEnd="true"
+         android:layout_marginTop="250dp"
+         android:onClick="selectFPS"
+         android:layout_alignStart="@+id/button2"
+         android:alpha="0.6" />
+
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Duration"
+         android:id="@+id/button4"
+         android:layout_gravity="left|center_vertical"
+         android:layout_alignParentEnd="true"
+         android:layout_marginTop="300dp"
+         android:onClick="selectDuration"
+         android:layout_alignStart="@+id/button3"
+         android:alpha="0.6" />
+
+     <ImageView
+         android:id="@+id/grid1"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:scaleType="fitCenter"
+         android:alpha="0.5" />
+
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Grid"
+         android:id="@+id/button5"
+         android:layout_alignParentEnd="true"
+         android:layout_marginTop="100dp"
+         android:layout_alignStart="@+id/button2"
+         android:alpha="0.6" />
+
+    <Chronometer
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Resolution"
-        android:id="@+id/button"
-        android:layout_gravity="left|center_vertical"
-        android:onClick="selectResolutoin"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="false"
-        android:alpha="0.6" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Frame Interval"
-        android:id="@+id/button2"
-        android:layout_gravity="right|bottom"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="50dp"
-        android:onClick="selectFrameInterval"
-        android:layout_alignStart="@+id/button"
-        android:alpha="0.6" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="FPS"
-        android:id="@+id/button3"
-        android:layout_gravity="right|bottom"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="250dp"
-        android:onClick="selectFPS"
-        android:layout_alignStart="@+id/button2"
-        android:alpha="0.6" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Duration"
-        android:id="@+id/button4"
-        android:layout_gravity="left|center_vertical"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="300dp"
-        android:onClick="selectDuration"
-        android:layout_alignStart="@+id/button3"
-        android:alpha="0.6" />
-
-    <ImageView
-        android:id="@+id/grid1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitCenter"
-        android:alpha="0.5" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Grid"
-        android:id="@+id/button5"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="100dp"
-        android:layout_alignStart="@+id/button2"
-        android:alpha="0.6" />
+        android:id="@+id/chronometer"
+        android:layout_gravity="left|bottom"
+        android:layout_marginTop="365dp" />
 
 </RelativeLayout>
