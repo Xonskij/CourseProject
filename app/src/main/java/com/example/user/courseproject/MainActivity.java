@@ -7,7 +7,6 @@ import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -16,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class MainActivity extends Activity implements View.OnTouchListener {
+public class MainActivity extends Activity implements View.OnTouchListener, View.OnClickListener {
 
     private Camera myCamera;
     private MyCameraSurfaceView myCameraSurfaceView;
@@ -49,6 +49,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); //что б не спал
 
+
         myCamera = getCameraInstance(); //получаем доступ к камере.Сам метод описан ниже
         if(myCamera == null){
             Toast.makeText(MainActivity.this,
@@ -65,6 +66,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         myButton.setOnClickListener(myButtonOnClickListener);
 
         addListenerOnButton();
+
     }
 
 /////////////////////////////////////////////////
@@ -241,6 +243,11 @@ public class MainActivity extends Activity implements View.OnTouchListener {
             myCamera.release();        // release the camera for other applications
             myCamera = null;
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 
 

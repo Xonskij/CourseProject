@@ -87,7 +87,14 @@
                  android:alpha="0.6">
              </Spinner>
          </TableRow>
-         <TableRow
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+        <TableRow
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:gravity="center_vertical">
@@ -191,5 +198,77 @@
         android:id="@+id/chronometer"
         android:layout_gravity="left|bottom"
         android:layout_marginTop="365dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Resolution:"
+        android:id="@+id/textView"
+        android:layout_marginTop="300dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Frame Interval:"
+        android:id="@+id/textView2"
+        android:layout_marginTop="315dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="FPS:"
+        android:id="@+id/textView3"
+        android:layout_marginTop="330dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Duration:"
+        android:id="@+id/textView4"
+        android:layout_alignParentTop="false"
+        android:layout_marginTop="345dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="1080p"
+        android:id="@+id/textView5"
+        android:layout_gravity="left|bottom"
+        android:layout_alignParentEnd="false"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="70dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="2 seconds"
+        android:id="@+id/textView6"
+        android:layout_marginTop="315dp"
+        android:layout_marginLeft="95dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="24"
+        android:id="@+id/textView7"
+        android:layout_marginTop="330dp"
+        android:layout_marginLeft="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="null"
+        android:id="@+id/textView8"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="345dp" />
 
 </RelativeLayout>
