@@ -17,6 +17,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -133,6 +134,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
                 current++;
                 current = current % images.length;
                 image.setImageResource(images[current]);
+                openFolder();
             }
         });
 
@@ -356,6 +358,15 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         }
     }
 
+    public void openFolder()
+    {
+        String folderPath = Environment.getExternalStorageDirectory()+"/sdcard/TimeLapseCamera";
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        Uri myUri = Uri.parse(folderPath);
+        intent.setDataAndType(myUri , "file/*");
+        startActivity(intent);
+    }
 
     void initSpinners() {
         // Цветовые эффекты
