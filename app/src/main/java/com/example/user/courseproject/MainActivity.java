@@ -67,25 +67,8 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
 
         imageButtonRec = (ImageButton)findViewById(R.id.imageButtonRec);
         imageButtonRec.setOnClickListener(myButtonOnClickListener);
-
-        imageButtonRec.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                //image.setImageResource(R.drawable.grid);
-                {
-                    // меняем изображение на кнопке
-                    if (flag)
-                        imageButtonRec.setImageResource(R.drawable.ic_stop2);
-                    else
-                        // возвращаем первую картинку
-                        imageButtonRec.setImageResource(R.drawable.ic_start2);
-                    flag = !flag;
-                }
-            }
-        });
-            addListenerOnButton();
-        }
+        addListenerOnButton();
+    }
 
 /////////////////////////////////////////////////
 
@@ -127,8 +110,8 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
         }
         return true;
     }
-//////
-        public void addListenerOnButton() {
+    //////
+    public void addListenerOnButton() {
 
         image = (ImageView) findViewById(R.id.grid1);
 
@@ -137,13 +120,12 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
 
             @Override
             public void onClick(View arg0) {
-                //image.setImageResource(R.drawable.grid);
                 {
-                    // меняем изображение на кнопке
+// меняем изображение на кнопке
                     if (flag)
                         imageButtonGrid.setImageResource(R.drawable.ic_grid_off);
                     else
-                        // возвращаем первую картинку
+// возвращаем первую картинку
                         imageButtonGrid.setImageResource(R.drawable.ic_grid);
                     flag = !flag;
                 }
@@ -152,11 +134,11 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
                 image.setImageResource(images[current]);
             }
         });
-}
+    }
 
 
 
-////////
+    ////////
     Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener(){
 
         @Override
@@ -165,18 +147,20 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
                 mediaRecorder.stop();
                 recording = false;
                 releaseMediaRecorder();
+                imageButtonRec.setImageResource(R.drawable.ic_start2);
             }
             else
             {
-               releaseCamera();
-            if (prepareMediaRecorder()) {
-                recording=true;
-                mediaRecorder.start();
-            }
-            else {
-                recording = false;
-                releaseMediaRecorder();
-            }
+                releaseCamera();
+                if (prepareMediaRecorder()) {
+                    recording=true;
+                    mediaRecorder.start();
+                    imageButtonRec.setImageResource(R.drawable.ic_stop2);
+                }
+                else {
+                    recording = false;
+                    releaseMediaRecorder();
+                }
             }
         }};
 
@@ -187,7 +171,7 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
             c = Camera.open(); //пытаемся получить экземпляр
         }
         catch (Exception e){
-            // исключения если с камерой что-то не так или её нет
+// исключения если с камерой что-то не так или её нет
         }
         return c; // returns null if camera is unavailable
     }
@@ -254,23 +238,23 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
     @Override
     protected void onPause() {
         super.onPause();
-        releaseMediaRecorder();       // if you are using MediaRecorder, release it first
-        releaseCamera();              // release the camera immediately on pause event
+        releaseMediaRecorder(); // if you are using MediaRecorder, release it first
+        releaseCamera(); // release the camera immediately on pause event
     }
 
 
     private void releaseMediaRecorder(){
         if (mediaRecorder != null) {
-            mediaRecorder.reset();   // clear recorder configuration
+            mediaRecorder.reset(); // clear recorder configuration
             mediaRecorder.release(); // release the recorder object
             mediaRecorder = null;
-            myCamera.lock();           // lock camera for later use
+            myCamera.lock(); // lock camera for later use
         }
     }
 
     private void releaseCamera(){
         if (myCamera != null){
-            myCamera.release();        // release the camera for other applications
+            myCamera.release(); // release the camera for other applications
             myCamera = null;
         }
     }
@@ -290,11 +274,11 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
             super(context);
             mCamera = camera;
 
-            // Install a SurfaceHolder.Callback so we get notified when the
-            // underlying surface is created and destroyed.
+// Install a SurfaceHolder.Callback so we get notified when the
+// underlying surface is created and destroyed.
             mHolder = getHolder();
             mHolder.addCallback(this);
-            // deprecated setting, but required on Android versions prior to 3.0
+// deprecated setting, but required on Android versions prior to 3.0
             mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         }
 
@@ -303,20 +287,20 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
                                    int height) {
 
             if (mHolder.getSurface() == null){
-                // preview surface does not exist
+// preview surface does not exist
                 return;
             }
 
-            // stop preview before making changes
+// stop preview before making changes
             try {
                 mCamera.stopPreview();
             } catch (Exception e){
-                // ignore: tried to stop a non-existent preview
+// ignore: tried to stop a non-existent preview
             }
 
-            // make any resize, rotate or reformatting changes here
+// make any resize, rotate or reformatting changes here
 
-            // start preview with new settings
+// start preview with new settings
             try {
                 mCamera.setPreviewDisplay(mHolder);
                 mCamera.startPreview();
@@ -327,8 +311,8 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
 
         @Override
         public void surfaceCreated(SurfaceHolder holder) {
-            // TODO Auto-generated method stub
-            // The Surface has been created, now tell the camera where to draw the preview.
+// TODO Auto-generated method stub
+// The Surface has been created, now tell the camera where to draw the preview.
             try {
                 mCamera.setPreviewDisplay(holder);
                 mCamera.startPreview();
@@ -338,7 +322,7 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
 
         @Override
         public void surfaceDestroyed(SurfaceHolder holder) {
-            // TODO Auto-generated method stub
+// TODO Auto-generated method stub
 
         }
     }
@@ -346,13 +330,13 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
 
 
     void initSpinners() {
-        // Цветовые эффекты
-        // получаем список цветовых эффектов
+// Цветовые эффекты
+// получаем список цветовых эффектов
         final List<String> colorEffects = myCamera.getParameters()
                 .getSupportedColorEffects();
         Spinner spEffect = initSpinner(R.id.spEffect, colorEffects, myCamera
                 .getParameters().getColorEffect());
-        // обработчик выбора
+// обработчик выбора
         spEffect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -367,12 +351,12 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
             }
         });
 
-        //Баланс Белого
+//Баланс Белого
         final List<String> colorEffectsWB = myCamera.getParameters()
                 .getSupportedWhiteBalance();
         Spinner spEffectWB = initSpinner(R.id.spEffectWB, colorEffectsWB, myCamera
                 .getParameters().getWhiteBalance());
-        // обработчик выбора
+// обработчик выбора
         spEffectWB.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -387,12 +371,12 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
             }
         });
 
-        //Режим фокуса
+//Режим фокуса
         final List<String> focusSelect = myCamera.getParameters()
                 .getSupportedFocusModes();
         Spinner focusSel = initSpinner(R.id.focusSel, focusSelect, myCamera
                 .getParameters().getFocusMode());
-        // обработчик выбора
+// обработчик выбора
         focusSel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -407,12 +391,12 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
             }
         });
 
-        //Выбор сцены
+//Выбор сцены
         final List<String> sceneMode = myCamera.getParameters()
                 .getSupportedSceneModes();
         Spinner sceneMode1 = initSpinner(R.id.scene_mode, sceneMode, myCamera
                 .getParameters().getSceneMode());
-        // обработчик выбора
+// обработчик выбора
         sceneMode1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -428,14 +412,14 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
         });
 
 
-        // Режимы вспышки
-        // получаем список режимов вспышки
+// Режимы вспышки
+// получаем список режимов вспышки
         final List<String> flashModes = myCamera.getParameters()
                 .getSupportedFlashModes();
-        // настройка спиннера
+// настройка спиннера
         Spinner spFlash = initSpinner(R.id.spFlash, flashModes, myCamera
                 .getParameters().getFlashMode());
-        // обработчик выбора
+// обработчик выбора
         spFlash.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -452,14 +436,14 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
     }
 
     Spinner initSpinner(int spinnerId, List<String> data, String currentValue) {
-        // настройка спиннера и адаптера для него
+// настройка спиннера и адаптера для него
         Spinner spinner = (Spinner) findViewById(spinnerId);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, data);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        // определеяем какое значение в списке является текущей настройкой
+// определеяем какое значение в списке является текущей настройкой
         for (int i = 0; i < data.size(); i++) {
             String item = data.get(i);
             if (item.equals(currentValue)) {
@@ -472,5 +456,3 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
 
 
 }
-
-
