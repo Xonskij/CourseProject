@@ -33,15 +33,13 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
     public static MediaRecorder mediaRecorder;
     public int current;
 
-    //Button myButton;
-    Button button5;
     ImageButton imageButtonGrid;
     ImageButton imageButtonRec;
     boolean flag = true;
     ImageView image;
     SurfaceHolder surfaceHolder;
     boolean recording;
-    int[] images = {R.drawable.grid_null, R.drawable.grid};
+    int[] images = {R.drawable.grid_null, R.drawable.grid_15x9x};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,7 +70,7 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
 
 /////////////////////////////////////////////////
 
-    public void selectResolutoin(View v){
+    public void selectResolution(View v){
 
         SelectResolution my_dialog = new SelectResolution();
         my_dialog.show(getSupportFragmentManager(), "my_dialog");
