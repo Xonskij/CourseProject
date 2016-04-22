@@ -195,17 +195,6 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButtonGrid"
-        android:layout_column="1"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/ic_grid"
-        android:background="#00686868"
-        android:layout_alignStart="@+id/imageView"
-        android:layout_alignParentEnd="true" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/imageButtonRec"
         android:layout_alignParentEnd="true"
         android:src="@drawable/ic_start2"
@@ -247,6 +236,17 @@
          android:onClick="selectDuration"
          android:layout_alignStart="@+id/button3"
          android:alpha="0.6" /> -->
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButtonGrid"
+        android:layout_column="1"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/ic_grid"
+        android:background="#00686868"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_alignParentEnd="true" />
 
     <ImageButton
         android:layout_width="wrap_content"

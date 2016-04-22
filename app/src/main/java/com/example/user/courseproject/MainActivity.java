@@ -451,6 +451,4 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
 
         return spinner;
     }
-
-
 }
