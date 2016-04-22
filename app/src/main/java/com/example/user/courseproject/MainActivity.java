@@ -3,103 +3,111 @@ package com.example.user.courseproject;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.SystemClock;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 
-public class MainActivity extends Activity implements View.OnTouchListener {
+public class MainActivity extends Activity implements View.OnTouchListener, View.OnClickListener {
 
     private Camera myCamera;
     private MyCameraSurfaceView myCameraSurfaceView;
     public static MediaRecorder mediaRecorder;
     public int current;
-    Button myButton;
+
+    //Button myButton;
     Button button5;
+    ImageButton imageButtonGrid;
+    ImageButton imageButtonRec;
+    boolean flag = true;
     ImageView image;
     SurfaceHolder surfaceHolder;
     boolean recording;
     int[] images = {R.drawable.grid_null, R.drawable.grid};
 
-    private GoogleApiClient client;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         recording = false; // по умолчанию запись отключена
+
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); //что б не спал
 
+
         myCamera = getCameraInstance(); //получаем доступ к камере.Сам метод описан ниже
-        if (myCamera == null) {
+        if(myCamera == null){
             Toast.makeText(MainActivity.this,
                     "Fail to get Camera",
                     Toast.LENGTH_LONG).show();
         }
 
         myCameraSurfaceView = new MyCameraSurfaceView(this, myCamera);//присваиваем переменной нашу камеру
-        FrameLayout myCameraPreview = (FrameLayout) findViewById(R.id.videoview);
+        FrameLayout myCameraPreview = (FrameLayout)findViewById(R.id.videoview);
         myCameraPreview.setOnTouchListener(this);
         myCameraPreview.addView(myCameraSurfaceView);//говорим что FramLayout отображает наш вид с камеры
 
-        myButton = (Button) findViewById(R.id.mybutton);
-        myButton.setOnClickListener(myButtonOnClickListener);
+        imageButtonRec = (ImageButton)findViewById(R.id.imageButtonRec);
+        imageButtonRec.setOnClickListener(myButtonOnClickListener);
 
-        addListenerOnButton();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
+        imageButtonRec.setOnClickListener(new View.OnClickListener() {
 
-    /////////////////////////////////////////////////
-    public void selectResolutoin(View v) {
+            @Override
+            public void onClick(View arg0) {
+                //image.setImageResource(R.drawable.grid);
+                {
+                    // меняем изображение на кнопке
+                    if (flag)
+                        imageButtonRec.setImageResource(R.drawable.ic_stop2);
+                    else
+                        // возвращаем первую картинку
+                        imageButtonRec.setImageResource(R.drawable.ic_start2);
+                    flag = !flag;
+                }
+            }
+        });
+            addListenerOnButton();
+        }
+
+/////////////////////////////////////////////////
+
+    public void selectResolutoin(View v){
 
         SelectResolution my_dialog = new SelectResolution();
         my_dialog.show(getSupportFragmentManager(), "my_dialog");
     }
 
-    public void selectFrameInterval(View v) {
+    public void selectFrameInterval(View v){
 
         SelectFrameInterval my_dialog1 = new SelectFrameInterval();
         my_dialog1.show(getSupportFragmentManager(), "my_dialog1");
     }
 
-    public void selectFPS(View v) {
+    public void selectFPS(View v){
 
         SelectFpsInVideo my_dialod2 = new SelectFpsInVideo();
         my_dialod2.show(getSupportFragmentManager(), "my_dialog2");
     }
 
-    public void selectDuration(View v) {
+    public void selectDuration(View v){
 
         SelectDuration my_dialog3 = new SelectDuration();
         my_dialog3.show(getSupportFragmentManager(), "my_dialog3");
@@ -119,55 +127,66 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         }
         return true;
     }
-
-    //////
-    public void addListenerOnButton() {
+//////
+        public void addListenerOnButton() {
 
         image = (ImageView) findViewById(R.id.grid1);
 
-        button5 = (Button) findViewById(R.id.button5);
-        button5.setOnClickListener(new View.OnClickListener() {
+        imageButtonGrid = (ImageButton) findViewById(R.id.imageButtonGrid);
+        imageButtonGrid.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 //image.setImageResource(R.drawable.grid);
+                {
+                    // меняем изображение на кнопке
+                    if (flag)
+                        imageButtonGrid.setImageResource(R.drawable.ic_grid_off);
+                    else
+                        // возвращаем первую картинку
+                        imageButtonGrid.setImageResource(R.drawable.ic_grid);
+                    flag = !flag;
+                }
                 current++;
                 current = current % images.length;
                 image.setImageResource(images[current]);
-                openFolder();
             }
         });
+}
 
-    }
 
-    ////////
-    Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener() {
+
+////////
+    Button.OnClickListener myButtonOnClickListener = new Button.OnClickListener(){
 
         @Override
         public void onClick(View v) {
-            if (mediaRecorder != null) {
+            if(mediaRecorder != null) {
                 mediaRecorder.stop();
                 recording = false;
                 releaseMediaRecorder();
-            } else {
-                releaseCamera();
-                if (prepareMediaRecorder()) {
-                    recording = true;
-                    mediaRecorder.start();
-                } else {
-                    recording = false;
-                    releaseMediaRecorder();
-                }
             }
-        }
-    };
+            else
+            {
+               releaseCamera();
+            if (prepareMediaRecorder()) {
+                recording=true;
+                mediaRecorder.start();
+            }
+            else {
+                recording = false;
+                releaseMediaRecorder();
+            }
+            }
+        }};
 
-    private Camera getCameraInstance() {
+    private Camera getCameraInstance(){
 // TODO Auto-generated method stub
         Camera c = null;
         try {
             c = Camera.open(); //пытаемся получить экземпляр
-        } catch (Exception e) {
+        }
+        catch (Exception e){
             // исключения если с камерой что-то не так или её нет
         }
         return c; // returns null if camera is unavailable
@@ -183,6 +202,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         mediaRecorder.setCamera(myCamera);
 
         mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
+
         mediaRecorder.setProfile(CamcorderProfile.get(SelectResolution.size));
         mediaRecorder.setVideoFrameRate(SelectFpsInVideo.fps); //fps
         mediaRecorder.setCaptureRate(SelectFrameInterval.rate);//сохранение кадра каждые #.# секунд
@@ -239,7 +259,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     }
 
 
-    private void releaseMediaRecorder() {
+    private void releaseMediaRecorder(){
         if (mediaRecorder != null) {
             mediaRecorder.reset();   // clear recorder configuration
             mediaRecorder.release(); // release the recorder object
@@ -248,55 +268,20 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         }
     }
 
-    private void releaseCamera() {
-        if (myCamera != null) {
+    private void releaseCamera(){
+        if (myCamera != null){
             myCamera.release();        // release the camera for other applications
             myCamera = null;
         }
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onClick(View v) {
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.example.user.courseproject/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.example.user.courseproject/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
     }
 
 
-    public class MyCameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
+    public class MyCameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback{
 
         private SurfaceHolder mHolder;
         private Camera mCamera;
@@ -317,7 +302,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         public void surfaceChanged(SurfaceHolder holder, int format, int weight,
                                    int height) {
 
-            if (mHolder.getSurface() == null) {
+            if (mHolder.getSurface() == null){
                 // preview surface does not exist
                 return;
             }
@@ -325,7 +310,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
             // stop preview before making changes
             try {
                 mCamera.stopPreview();
-            } catch (Exception e) {
+            } catch (Exception e){
                 // ignore: tried to stop a non-existent preview
             }
 
@@ -336,7 +321,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
                 mCamera.setPreviewDisplay(mHolder);
                 mCamera.startPreview();
 
-            } catch (Exception e) {
+            } catch (Exception e){
             }
         }
 
@@ -358,20 +343,11 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         }
     }
 
-    public void openFolder()
-    {
-        String folderPath = Environment.getExternalStorageDirectory()+"/sdcard/TimeLapseCamera";
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        Uri myUri = Uri.parse(folderPath);
-        intent.setDataAndType(myUri , "file/*");
-        startActivity(intent);
-    }
+
 
     void initSpinners() {
         // Цветовые эффекты
         // получаем список цветовых эффектов
-
         final List<String> colorEffects = myCamera.getParameters()
                 .getSupportedColorEffects();
         Spinner spEffect = initSpinner(R.id.spEffect, colorEffects, myCamera
@@ -493,6 +469,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         return spinner;
     }
+
 
 }
 
