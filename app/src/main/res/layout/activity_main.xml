@@ -48,22 +48,6 @@
                  android:alpha="0.6">
              </Spinner>
          </TableRow>
-         <TableRow
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:gravity="center_vertical">
-             <TextView
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="@string/flash_mode">
-             </TextView>
-             <Spinner
-                 android:id="@+id/spFlash"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:alpha="0.6">
-             </Spinner>
-         </TableRow>
 
          <TableRow
              android:layout_width="match_parent"
@@ -258,6 +242,17 @@
         android:background="#00ffffff"
         android:src="@drawable/ic_dur"
         android:layout_alignStart="@+id/imageView" />
+
+    <ImageButton
+        android:id="@+id/flashlight_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_flash_on"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="340dp"
+        android:layout_alignStart="@+id/imageView"
+        android:background="#00ffffff" />
 
     <TextView
         android:layout_width="wrap_content"

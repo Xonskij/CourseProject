@@ -3,6 +3,7 @@ package com.example.user.courseproject;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
@@ -25,7 +26,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-
 public class MainActivity extends Activity implements View.OnTouchListener, View.OnClickListener {
 
     private Camera myCamera;
@@ -33,13 +33,17 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
     public static MediaRecorder mediaRecorder;
     public int current;
 
+    private Camera.Parameters parameters;
+    private ImageButton flashLightButton;
+    boolean isFlashLightOn = false;
+
     ImageButton imageButtonGrid;
     ImageButton imageButtonRec;
     boolean flag = true;
     ImageView image;
     SurfaceHolder surfaceHolder;
     boolean recording;
-    int[] images = {R.drawable.grid_null, R.drawable.grid_15x9x};
+    int[] images = {R.drawable.grid_null, R.drawable.grid};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,21 +56,57 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
 
 
         myCamera = getCameraInstance(); //получаем доступ к камере.Сам метод описан ниже
-        if(myCamera == null){
+        if (myCamera == null) {
             Toast.makeText(MainActivity.this,
                     "Fail to get Camera",
                     Toast.LENGTH_LONG).show();
         }
 
         myCameraSurfaceView = new MyCameraSurfaceView(this, myCamera);//присваиваем переменной нашу камеру
-        FrameLayout myCameraPreview = (FrameLayout)findViewById(R.id.videoview);
+        FrameLayout myCameraPreview = (FrameLayout) findViewById(R.id.videoview);
         myCameraPreview.setOnTouchListener(this);
         myCameraPreview.addView(myCameraSurfaceView);//говорим что FramLayout отображает наш вид с камеры
 
-        imageButtonRec = (ImageButton)findViewById(R.id.imageButtonRec);
+        imageButtonRec = (ImageButton) findViewById(R.id.imageButtonRec);
         imageButtonRec.setOnClickListener(myButtonOnClickListener);
         addListenerOnButton();
+
+        flashLightButton = (ImageButton)findViewById(R.id.flashlight_button);
+        flashLightButton.setOnClickListener(new FlashOnOffListener());
+
+        if (isFlashSupported()) {
+            parameters = myCamera.getParameters();
+        }
+
     }
+
+
+    private class FlashOnOffListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            if(isFlashLightOn){
+                flashLightButton.setImageResource(R.drawable.ic_flash_on);
+                parameters.setFlashMode(parameters.FLASH_MODE_OFF);
+                myCamera.setParameters(parameters);
+                isFlashLightOn = false;
+            }else{
+                flashLightButton.setImageResource(R.drawable.ic_flash_off);
+                parameters.setFlashMode(parameters.FLASH_MODE_TORCH);
+                myCamera.setParameters(parameters);
+                myCamera.startPreview();
+                isFlashLightOn = true;
+            }
+
+        }
+
+    }
+
+    private boolean isFlashSupported() {
+        PackageManager pm = getPackageManager();
+        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+    }
+
 
 /////////////////////////////////////////////////
 
@@ -189,6 +229,7 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
         mediaRecorder.setVideoFrameRate(SelectFpsInVideo.fps); //fps
         mediaRecorder.setCaptureRate(SelectFrameInterval.rate);//сохранение кадра каждые #.# секунд
         mediaRecorder.setMaxDuration(SelectDuration.dur);//продолжительность видео
+        mediaRecorder.setVideoEncodingBitRate(80000000);//битрейт
 
 
         File wallpaperDirectory = new File("/sdcard/TimeLapseCamera/");
@@ -409,28 +450,6 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
             }
         });
 
-
-// Режимы вспышки
-// получаем список режимов вспышки
-        final List<String> flashModes = myCamera.getParameters()
-                .getSupportedFlashModes();
-// настройка спиннера
-        Spinner spFlash = initSpinner(R.id.spFlash, flashModes, myCamera
-                .getParameters().getFlashMode());
-// обработчик выбора
-        spFlash.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int arg2, long arg3) {
-                Camera.Parameters params = myCamera.getParameters();
-                params.setFlashMode(flashModes.get(arg2));
-                myCamera.setParameters(params);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
     }
 
     Spinner initSpinner(int spinnerId, List<String> data, String currentValue) {
