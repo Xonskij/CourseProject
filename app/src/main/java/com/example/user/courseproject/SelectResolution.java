@@ -6,11 +6,10 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.media.CamcorderProfile;
 import android.os.Bundle;
-import android.widget.Toast;
 
 public class SelectResolution extends DialogFragment {
     String selection;
-    public static Integer size = CamcorderProfile.QUALITY_TIME_LAPSE_1080P;
+    public static Integer size = CamcorderProfile.QUALITY_TIME_LAPSE_HIGH;
     final CharSequence[] items = {"Full HD 1080p","HD 720p","SD 480p","QVGA 240p"};
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
