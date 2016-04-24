@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
     <FrameLayout
         android:id="@+id/videoview"
@@ -217,7 +219,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Resolution:"
         android:id="@+id/textView"
-        android:layout_marginTop="300dp" />
+        android:layout_marginTop="335dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -225,7 +227,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Frame Interval:"
         android:id="@+id/textView2"
-        android:layout_marginTop="315dp" />
+        android:layout_marginTop="350dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -233,7 +235,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="FPS:"
         android:id="@+id/textView3"
-        android:layout_marginTop="330dp" />
+        android:layout_marginTop="365dp" />
 
 
     <TextView
@@ -244,7 +246,7 @@
         android:id="@+id/textView5"
         android:layout_gravity="left|bottom"
         android:layout_alignParentEnd="false"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="335dp"
         android:layout_marginLeft="70dp" />
 
     <TextView
@@ -253,7 +255,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="2 seconds"
         android:id="@+id/textView6"
-        android:layout_marginTop="315dp"
+        android:layout_marginTop="350dp"
         android:layout_marginLeft="95dp" />
 
     <TextView
@@ -262,7 +264,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="24"
         android:id="@+id/textView7"
-        android:layout_marginTop="330dp"
+        android:layout_marginTop="365dp"
         android:layout_marginLeft="30dp" />
 
 </RelativeLayout>
