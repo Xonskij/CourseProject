@@ -43,7 +43,7 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
     ImageView image;
     SurfaceHolder surfaceHolder;
     boolean recording;
-    int[] images = {R.drawable.grid_null, R.drawable.grid};
+    int[] images = {R.drawable.grid_null, R.drawable.grid_15x9x};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -229,7 +229,7 @@ public class MainActivity extends Activity implements View.OnTouchListener, View
         mediaRecorder.setVideoFrameRate(SelectFpsInVideo.fps); //fps
         mediaRecorder.setCaptureRate(SelectFrameInterval.rate);//сохранение кадра каждые #.# секунд
         mediaRecorder.setMaxDuration(SelectDuration.dur);//продолжительность видео
-        mediaRecorder.setVideoEncodingBitRate(80000000);//битрейт
+        //mediaRecorder.setVideoEncodingBitRate(80000000);//битрейт
 
 
         File wallpaperDirectory = new File("/sdcard/TimeLapseCamera/");
