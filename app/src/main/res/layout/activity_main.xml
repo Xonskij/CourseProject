@@ -32,7 +32,7 @@
         android:textStyle="bold"
         android:alpha="0.6" /> -->
     <TableLayout
-         android:layout_width="140dp"
+         android:layout_width="230dp"
          android:layout_height="wrap_content">
          <TableRow
              android:layout_width="wrap_content"
@@ -41,13 +41,13 @@
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="@string/color_effect">
+                 android:text="@string/color_effect"
+                 android:textColor="#ffffff">
              </TextView>
              <Spinner
                  android:id="@+id/spEffect"
                  android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:alpha="0.6">
+                 android:layout_height="wrap_content">
              </Spinner>
          </TableRow>
 
@@ -64,13 +64,13 @@
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="@string/white_balance">
+                 android:text="@string/white_balance"
+                 android:textColor="#ffffff">
              </TextView>
              <Spinner
                  android:id="@+id/spEffectWB"
                  android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:alpha="0.6">
+                 android:layout_height="wrap_content">
              </Spinner>
          </TableRow>
 
@@ -87,13 +87,13 @@
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="@string/focus_sel">
+                 android:text="@string/focus_sel"
+                 android:textColor="#ffffff">
              </TextView>
              <Spinner
                  android:id="@+id/focusSel"
                  android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:alpha="0.6">
+                 android:layout_height="wrap_content">
              </Spinner>
          </TableRow>
          <TableRow
@@ -103,13 +103,13 @@
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="@string/scene_mode">
+                 android:text="@string/scene_mode"
+                 android:textColor="#ffffff">
              </TextView>
              <Spinner
                  android:id="@+id/scene_mode"
                  android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:alpha="0.6">
+                 android:layout_height="wrap_content">
              </Spinner>
          </TableRow>
      </TableLayout>
@@ -219,7 +219,8 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Resolution:"
         android:id="@+id/textView"
-        android:layout_marginTop="335dp" />
+        android:layout_marginTop="335dp"
+        android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -227,7 +228,8 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Frame Interval:"
         android:id="@+id/textView2"
-        android:layout_marginTop="350dp" />
+        android:layout_marginTop="350dp"
+        android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -235,7 +237,8 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="FPS:"
         android:id="@+id/textView3"
-        android:layout_marginTop="365dp" />
+        android:layout_marginTop="365dp"
+        android:textColor="#ffffff" />
 
 
     <TextView
@@ -247,7 +250,8 @@
         android:layout_gravity="left|bottom"
         android:layout_alignParentEnd="false"
         android:layout_marginTop="335dp"
-        android:layout_marginLeft="70dp" />
+        android:layout_marginLeft="70dp"
+        android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -256,7 +260,8 @@
         android:text="2 seconds"
         android:id="@+id/textView6"
         android:layout_marginTop="350dp"
-        android:layout_marginLeft="95dp" />
+        android:layout_marginLeft="95dp"
+        android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -265,6 +270,7 @@
         android:text="24"
         android:id="@+id/textView7"
         android:layout_marginTop="365dp"
-        android:layout_marginLeft="30dp" />
+        android:layout_marginLeft="30dp"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>
